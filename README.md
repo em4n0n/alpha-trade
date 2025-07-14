@@ -1,6 +1,6 @@
 # alpha trade
 Options trade recommendations
-"""
+
 Python app that proposes options trades under rigorous risk and portfolio constraints.
 
 Key Features
@@ -17,4 +17,17 @@ Setup
 $ pip install yfinance pandas numpy tabulate requests
 
 Optionally set `POLYGON_API_KEY` (env) for faster, deeper option‑chain snapshots.
-"""
+
+Improvements (2025-07-13)
+------------------------
+* **UTC-aware dates** – replaces deprecated `datetime.utcnow()`
+* **Delta handling** – yfinance chains lack Greeks. We now compute Black-Scholes delta on the fly when not provided.
+* **Safer mid-price calc** – falls back to `lastPrice` if bid/ask unavailable.
+* **Correct SELL/BUY logic** – parenthesis fix.
+
+Setup
+-----
+bash
+pip install yfinance pandas numpy tabulate  # stdlib covers math/dateutils
+
+(No extra deps; BS delta uses `math.erf`.)
